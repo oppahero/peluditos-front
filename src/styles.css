@@ -4,3 +4,13 @@
 @custom-variant dark (&:where(.app-dark, .app-dark *));
 
 @layer tailwind, primeng;
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../public/fonts/Inter_Regular.ttf');
+}
+
+@theme {
+  --font-inter: 'Inter', sans-serif;
+  --default-font-family: 'Inter';
+}
