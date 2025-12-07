@@ -1,0 +1,123 @@
+<nav class="relative border-dashed border-b border-white/10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo -->
+      <a href="" class="flex items-center">
+        <img src="/logo-white.png" alt="icon" class="h-20 w-36" />
+      </a>
+
+      <!-- Desktop menu -->
+      <div class="hidden md:flex md:items-center md:space-x-2">
+        <a
+          href=""
+          class="text-white/60 px-3.5 py-1 rounded-full hover:bg-white/20 hover:text-white transition"
+          >Inicio</a
+        >
+        <a
+          href=""
+          class="text-white/60 px-3.5 py-1 rounded-full hover:bg-white/20 hover:text-white transition"
+          >Servicios</a
+        >
+        <a
+          href=""
+          class="text-white/60 px-3.5 py-1 rounded-full hover:bg-white/20 hover:text-white transition"
+          >Nosotros</a
+        >
+        <a
+          href=""
+          class="text-white/60 px-3.5 py-1 rounded-full hover:bg-white/20 hover:text-white transition"
+          >Contacto</a
+        >
+      </div>
+
+      <!-- Mobile hamburger -->
+      <div class="md:hidden">
+        <button
+          (click)="toggle()"
+          type="button"
+          aria-label="Toggle menu"
+          class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        >
+          <div class="h-8 w-8 bg-white rounded-full flex items-center justify-center">
+            <svg
+              *ngIf="!isOpen"
+              class="h-5 w-5"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+            <svg
+              *ngIf="isOpen"
+              class="h-5 w-5"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </div>
+        </button>
+      </div>
+
+      <div class="hidden lg:block">
+        <button class="bg-white px-5 py-1 rounded-full cursor-pointer font-medium hover:opacity-80">
+          Ingresar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu, show/hide based on menu state. -->
+  <div *ngIf="isOpen" class="md:hidden bg-white w-3xs absolute right-4 rounded-2xl">
+    <ul class="px-2 pt-2 pb-3 space-y-1">
+      <li>
+        <a
+          (click)="close()"
+          href=""
+          class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50"
+          >Inicio</a
+        >
+      </li>
+      <li>
+        <a
+          (click)="close()"
+          href=""
+          class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50"
+          >Servicios</a
+        >
+      </li>
+      <li>
+        <a
+          (click)="close()"
+          href=""
+          class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50"
+          >Nosotros</a
+        >
+      </li>
+      <li>
+        <a
+          (click)="close()"
+          href=""
+          class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50"
+          >Contacto</a
+        >
+      </li>
+    </ul>
+  </div>
+</nav>
