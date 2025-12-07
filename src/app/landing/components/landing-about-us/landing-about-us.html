@@ -1,25 +1,38 @@
-<div id="about-us" class="container mt-30 mx-auto grid gap-3 lg:max-w-6xl md:mt-40 md:grid-cols-2">
-  <div class="flex flex-col gap-2 mx-6 justify-center">
-    <h2 class="text-2xl font-semibold mb-4 md:text-4xl">Sobre Nosotros</h2>
-    <p class="text-gray-600 max-w-2xl mb-7">
-      En Peluditos, nos apasiona brindar el mejor cuidado y amor a tus mascotas. Nuestro equipo de
-      profesionales está dedicado a ofrecer servicios de alta calidad que garantizan la felicidad y
-      bienestar de tus compañeros peludos.
-    </p>
-
-    <div>
-      <h3 class="text-2xl font-semibold mb-4">Nuestra Misión</h3>
-      <p class="text-gray-600 max-w-2xl">
-        Nuestra misión es acompañarte en cada etapa de la vida de tu mascota, desde sus primeros
-        pasos hasta su madurez, asegurando que siempre reciba la mejor atención posible.
-      </p>
-    </div>
-  </div>
-
-  <div
-    #vetImg
-    class="flex justify-center mx-6 opacity-0 translate-y-4 transition-all duration-700 ease-out"
+<div class="overflow-hidden">
+  <section
+    id="about-us"
+    class="container mt-30 mx-auto grid gap-3 lg:max-w-6xl md:mt-40 md:grid-cols-2"
   >
-    <img src="/img/landing-vet.png" alt="Veterinaria" class="mx-w-80" />
-  </div>
+    <div class="flex flex-col gap-2 mx-6 justify-center">
+      <h2 class="text-2xl font-semibold mb-4 md:text-4xl">Sobre Nosotros</h2>
+      <p class="text-gray-600 max-w-2xl mb-7">
+        En Peluditos, nos apasiona brindar el mejor cuidado y amor a tus mascotas. Nuestro equipo de
+        profesionales está dedicado a ofrecer servicios de alta calidad que garantizan la felicidad
+        y bienestar de tus compañeros peludos.
+      </p>
+
+      <div>
+        <h3 class="text-2xl font-semibold mb-4">Nuestra Misión</h3>
+        <p class="text-gray-600 max-w-2xl">
+          Nuestra misión es acompañarte en cada etapa de la vida de tu mascota, desde sus primeros
+          pasos hasta su madurez, asegurando que siempre reciba la mejor atención posible.
+        </p>
+      </div>
+    </div>
+
+    <div
+      #vetImg
+      class="mask-radial-at-bottom-left mask-radial-from-100% flex justify-center mx-6 opacity-0 translate-y-4 transition-all duration-700 ease-out"
+    >
+      <img
+        src="/img/vet-mujer.png"
+        alt="Veterinaria"
+        class="max-h-3/4 mask-b-from-80% md:max-h-9/10"
+      />
+    </div>
+
+    <section class="mt-20 md:col-span-2">
+      <app-professionals />
+    </section>
+  </section>
 </div>
