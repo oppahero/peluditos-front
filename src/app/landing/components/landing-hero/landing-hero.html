@@ -28,7 +28,45 @@
             </p>
           </div>
         </div>
+
+        <!-- Small spacer for hero content (SVG moved outside masked container so it's not clipped by mask) -->
+        <!-- <div class="h-12" aria-hidden="true"></div> -->
       </div>
     </div>
   </div>
+
+  <a
+    href="#about-us"
+    aria-label="Ir a Sobre Nosotros"
+    class="absolute left-1/2 -translate-x-1/2 bottom-1 z-50 animate-bounce"
+  >
+    <svg
+      width="70"
+      height="70"
+      viewBox="0 0 84 100"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      role="img"
+    >
+      <defs>
+        <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+          <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.25" />
+        </filter>
+      </defs>
+      <!-- Circle -->
+      <g filter="url(#shadow)">
+        <circle cx="42" cy="42" r="34" fill="#ffffff" />
+        <circle cx="42" cy="42" r="34" fill="none" stroke="#E2E8F0" stroke-width="1" />
+      </g>
+
+      <path
+        d="M42 28 L42 52 M32 42 L42 52 L52 42"
+        stroke="black"
+        stroke-width="3"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        fill="none"
+      />
+    </svg>
+  </a>
 </div>
