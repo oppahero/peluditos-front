@@ -1,9 +1,8 @@
 import { Component, AfterViewInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
-import { Professionals } from '../professionals/professionals';
 
 @Component({
   selector: 'app-landing-about-us',
-  imports: [Professionals],
+  imports: [],
   templateUrl: './landing-about-us.html',
 })
 export class LandingAboutUs implements AfterViewInit, OnDestroy {
