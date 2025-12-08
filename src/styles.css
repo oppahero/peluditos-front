@@ -15,3 +15,26 @@
   --default-font-family: 'Inter';
   --color-old-rose: #b27d7c;
 }
+
+/* Estilo general del scrollbar */
+::-webkit-scrollbar {
+  width: 8px; /* ancho de la barra vertical */
+  height: 8px; /* alto de la barra horizontal */
+}
+
+/* Fondo del track (la parte por donde se mueve la barra) */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* color de fondo */
+  border-radius: 10px; /* bordes redondeados */
+}
+
+/* El thumb (la parte que se arrastra) */
+::-webkit-scrollbar-thumb {
+  background: #8b4e29; /* color del thumb */
+  border-radius: 10px; /* bordes redondeados */
+}
+
+/* Hover sobre el thumb */
+::-webkit-scrollbar-thumb:hover {
+  background: #70462c; /* color más oscuro al pasar el cursor */
+}
