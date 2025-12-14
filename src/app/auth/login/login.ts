@@ -1,14 +1,14 @@
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Component, inject, signal } from '@angular/core';
-import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { FloatLabel } from 'primeng/floatlabel';
 import { CheckboxModule } from 'primeng/checkbox';
 import { PasswordModule } from 'primeng/password';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FloatLabel } from 'primeng/floatlabel';
 import { MessageModule } from 'primeng/message';
 import { Auth } from '../../core/services/auth';
-import { catchError, of } from 'rxjs';
+import { ButtonModule } from 'primeng/button';
+import { Router } from '@angular/router';
+import { LoginResponse } from '../../core/interfaces/login-response';
 
 @Component({
   selector: 'app-login',
@@ -22,15 +22,12 @@ import { catchError, of } from 'rxjs';
     MessageModule,
   ],
   templateUrl: './login.html',
-  styleUrl: './login.css',
 })
 export class Login {
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private authService = inject(Auth);
 
-  // Signals para estado reactivo local
-  loading = signal(false);
   formSubmitted = signal(false);
   errorMessage = signal('');
 
@@ -41,9 +38,10 @@ export class Login {
   });
 
   onSubmit() {
-    if (this.form.invalid) return;
+    this.formSubmitted.set(true);
+    this.errorMessage.set('');
 
-    console.log('Form Value', this.form.value);
+    if (this.form.invalid) return;
 
     const data = {
       username: this.form.value.username ?? '',
@@ -52,20 +50,19 @@ export class Login {
 
     this.authService
       .login(data)
-      .pipe(
-        catchError((err) => {
-          this.loading.set(false);
-          return of(null);
-        })
-      )
-      .subscribe((res) => {
-        console.log('Login Response:', res);
-        // this.router.navigate(['/dashboard']);
-      });
+      .subscribe({
+        next: (res) => this.success(res),
+        error: (err) => this.errorMessage.set(err?.detail ?? 'Error inesperado'),
+      })
+      .add(() => this.formSubmitted.set(false));
   }
 
   isInvalid(controlName: string) {
     const control = this.form.get(controlName);
     return control?.invalid && (control.touched || this.formSubmitted());
+  }
+
+  success(res: LoginResponse) {
+    this.router.navigate(['/dashboard']);
   }
 }
