@@ -10,7 +10,8 @@ import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
 import { definePreset } from '@primeuix/themes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { errorHandlerInterceptor } from './core/interceptors/error-handler-interceptor';
 
 const MyPreset = definePreset(Aura, {
   semantic: {
@@ -35,7 +36,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([errorHandlerInterceptor])),
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {
