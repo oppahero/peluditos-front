@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-navbar',
+  selector: 'app-landing-navbar',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  templateUrl: './navbar.html',
+  templateUrl: './landing-navbar.html',
 })
-export class Navbar {
+export class LandingNavbar {
   isOpen = false;
 
   toggle() {
