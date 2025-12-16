@@ -1,68 +1,70 @@
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Component, inject, signal } from '@angular/core';
+import { LoginCredentials } from '../../core/interfaces/login-credentials.interface';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { AuthFacade } from '../../core/services/auth/auth-facade';
 import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
 import { PasswordModule } from 'primeng/password';
 import { FloatLabel } from 'primeng/floatlabel';
 import { MessageModule } from 'primeng/message';
-import { Auth } from '../../core/services/auth';
 import { ButtonModule } from 'primeng/button';
-import { Router } from '@angular/router';
-import { LoginResponse } from '../../core/interfaces/login-response';
+import { finalize } from 'rxjs';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  ReactiveFormsModule,
+  NonNullableFormBuilder,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   imports: [
-    ReactiveFormsModule,
-    InputTextModule,
     FloatLabel,
     ButtonModule,
+    MessageModule,
     CheckboxModule,
     PasswordModule,
-    MessageModule,
+    InputTextModule,
+    ReactiveFormsModule,
   ],
   templateUrl: './login.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Login {
-  private fb = inject(FormBuilder);
-  private router = inject(Router);
-  private authService = inject(Auth);
+  private fb = inject(NonNullableFormBuilder);
+  private authFacade = inject(AuthFacade);
 
   formSubmitted = signal(false);
-  errorMessage = signal('');
+  loading = signal(false);
+  errorMessage = signal<null | string>(null);
 
-  form = this.fb.group({
-    username: ['', [Validators.required, Validators.maxLength(10)]],
-    password: ['', [Validators.required, Validators.maxLength(10)]],
-    rememberMe: [false],
+  form: FormGroup = this.fb.group({
+    username: new FormControl<string>('', [Validators.required, Validators.maxLength(10)]),
+    password: new FormControl<string>('', [Validators.required, Validators.maxLength(10)]),
+    rememberMe: new FormControl<boolean>(false),
   });
 
   onSubmit() {
     this.formSubmitted.set(true);
-    this.errorMessage.set('');
+    this.loading.set(true);
 
     if (this.form.invalid) return;
 
-    const data = {
-      username: this.form.value.username ?? '',
-      password: this.form.value.password ?? '',
-    };
-
-    this.authService
-      .login(data)
+    this.authFacade
+      .login(this.form.getRawValue() as LoginCredentials)
+      .pipe(
+        finalize(() => {
+          this.formSubmitted.set(false);
+          this.loading.set(false);
+        })
+      )
       .subscribe({
-        next: (res) => this.success(res),
-        error: (err) => this.errorMessage.set(err?.detail ?? 'Error inesperado'),
-      })
-      .add(() => this.formSubmitted.set(false));
+        error: (err) => this.errorMessage.set(err.message),
+      });
   }
 
   isInvalid(controlName: string) {
     const control = this.form.get(controlName);
     return control?.invalid && (control.touched || this.formSubmitted());
-  }
-
-  success(res: LoginResponse) {
-    this.router.navigate(['/dashboard']);
   }
 }
