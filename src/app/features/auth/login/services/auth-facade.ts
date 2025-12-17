@@ -1,8 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthApi } from './auth-api';
-import { LoginCredentials } from '../../../features/auth/login/interfaces/login-credentials.interface';
+import { LoginCredentials } from '../interfaces/login-credentials.interface';
 import { map, tap } from 'rxjs';
+import { AuthApi } from 'src/app/features/auth/login/services/auth-api';
 
 @Injectable({
   providedIn: 'root',

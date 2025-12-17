@@ -1,6 +1,6 @@
-import { LoginCredentials } from '../../core/interfaces/login-credentials.interface';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { AuthFacade } from '../../core/services/auth/auth-facade';
+import { LoginCredentials } from '../interfaces/login-credentials.interface';
+import { AuthFacade } from '../services/auth-facade';
 import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
 import { PasswordModule } from 'primeng/password';
@@ -59,7 +59,7 @@ export class Login {
         })
       )
       .subscribe({
-        error: (err) => this.errorMessage.set(err.message),
+        error: (err: Error) => this.errorMessage.set(err.message),
       });
   }
 

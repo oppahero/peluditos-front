@@ -1,9 +1,9 @@
+import { LoginCredentials } from '../interfaces/login-credentials.interface';
+import { AuthResponse } from '@app/core/interfaces/auth-response.interface';
+import { environment } from '@environments/environment.development';
+import { catchError, Observable, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
-import { LoginCredentials } from '../interfaces/login-credentials.interface';
-import { AuthResponse } from '../../../../core/interfaces/auth-response.interface';
-import { environment } from '../../../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',

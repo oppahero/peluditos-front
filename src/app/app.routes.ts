@@ -7,6 +7,6 @@ export const routes: Routes = [
   },
   {
     path: 'auth',
-    loadComponent: () => import('./features/auth/login/login').then((m) => m.Login),
+    loadComponent: () => import('./features/auth/login/components/login').then((m) => m.Login),
   },
 ];
