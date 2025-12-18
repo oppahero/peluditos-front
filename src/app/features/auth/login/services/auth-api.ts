@@ -12,11 +12,15 @@ export class AuthApi {
   private url = environment.apiUrl + '/auth';
   private http = inject(HttpClient);
 
-  login(credentials: LoginCredentials): Observable<AuthResponse> {
+  auth(credentials: LoginCredentials): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.url}/login`, credentials).pipe(
       catchError((err) => {
         return throwError(() => new Error(err?.detail ?? 'Error inesperado'));
       })
     );
+  }
+
+  refreshToken() {
+    return this.http.post(`${this.url}/refresh`, null);
   }
 }
