@@ -29,6 +29,7 @@ import {
   ],
   templateUrl: './login.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [AuthFacade],
 })
 export class Login {
   private fb = inject(NonNullableFormBuilder);
