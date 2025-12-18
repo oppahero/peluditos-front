@@ -1,8 +1,10 @@
+import { UserRoles } from '../enums/rol.enum';
+
 export interface User {
-  id: string;
-  email: string;
-  name: string;
-  roles: string[];
-  isActive: boolean;
-  createdAt: Date;
+  users_id: string;
+  username: string;
+  rol: UserRoles;
+  email?: string;
+  isActive?: boolean;
+  createdAt?: Date;
 }
