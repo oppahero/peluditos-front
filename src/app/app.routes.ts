@@ -9,4 +9,8 @@ export const routes: Routes = [
     path: 'auth',
     loadComponent: () => import('./features/auth/login/components/login').then((m) => m.Login),
   },
+  {
+    path: 'dashboard',
+    loadComponent: () => import('./layout/layout').then((m) => m.Layout),
+  },
 ];

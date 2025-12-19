@@ -1,0 +1,11 @@
+.layout-topbar-action {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--text-color);
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background-color var(--element-transition-duration);
+}
