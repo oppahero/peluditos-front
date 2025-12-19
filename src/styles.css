@@ -5,6 +5,8 @@
 
 @layer tailwind, primeng;
 
+@import 'primeicons/primeicons.css';
+
 @font-face {
   font-family: 'Inter';
   src: url('../public/fonts/Inter_Regular.ttf');
