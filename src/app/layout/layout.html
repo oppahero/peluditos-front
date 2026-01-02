@@ -1,4 +1,13 @@
-<div class="min-h-full">
+<div class="h-screen overflow-hidden">
   <app-topbar />
-  <p>layout works!</p>
+
+  <app-sidebar />
+
+  <main class="ml-64 mt-16 h-[calc(100vh-4rem)]">
+    <div
+      class="h-full p-8 overflow-auto bg-rose-100 border-t border-t-rose-300 rounded-tl-[30px] shadow-[inset_0_3px_4px_#0000001a]"
+    >
+      <router-outlet />
+    </div>
+  </main>
 </div>
