@@ -1,21 +1,36 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { Menu } from 'primeng/menu';
 import { MenuItem } from 'primeng/api';
+import { CommonModule } from '@angular/common';
+import { SidebarService } from '@app/layout/services/sidebar-service';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [Menu],
+  imports: [Menu, CommonModule],
   templateUrl: './sidebar.html',
   styles: `
     :host ::ng-deep .p-menu {
       border: none !important;
       box-shadow: none !important;
     }
+
+    .layout-mobile-active {
+
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Sidebar implements OnInit {
   items: MenuItem[] | undefined;
+  isSidebarVisible: boolean = true;
+  private sidebarService = inject(SidebarService);
+  private cdr = inject(ChangeDetectorRef);
 
   ngOnInit() {
     this.items = [
@@ -67,5 +82,10 @@ export class Sidebar implements OnInit {
         ],
       },
     ];
+
+    this.sidebarService.visible$.subscribe((value) => {
+      this.isSidebarVisible = value;
+      this.cdr.detectChanges();
+    });
   }
 }
