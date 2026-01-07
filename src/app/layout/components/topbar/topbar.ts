@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { SidebarService } from '@app/layout/services/sidebar-service';
 
 @Component({
   selector: 'app-topbar',
@@ -8,5 +9,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Topbar {
+  sidebarService = inject(SidebarService);
 
+  toggleSidebar() {
+    this.sidebarService.toggle();
+  }
 }
