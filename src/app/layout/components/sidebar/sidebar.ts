@@ -9,19 +9,16 @@ import { Menu } from 'primeng/menu';
 import { MenuItem } from 'primeng/api';
 import { CommonModule } from '@angular/common';
 import { SidebarService } from '@app/layout/services/sidebar-service';
+import { RouterLink, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [Menu, CommonModule],
+  imports: [Menu, CommonModule, RouterLink, RouterModule],
   templateUrl: './sidebar.html',
   styles: `
     :host ::ng-deep .p-menu {
       border: none !important;
       box-shadow: none !important;
-    }
-
-    .layout-mobile-active {
-
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -39,7 +36,7 @@ export class Sidebar implements OnInit {
         items: [
           {
             label: 'Dashboard',
-            icon: 'pi pi-house',
+            icon: 'pi pi-fw pi-home',
             routerLink: '/dashboard',
           },
           // {
@@ -56,12 +53,12 @@ export class Sidebar implements OnInit {
         items: [
           {
             label: 'Usuarios',
-            icon: 'pi pi-house',
+            icon: 'pi pi-user',
             routerLink: '',
           },
           {
-            label: 'Empleador',
-            icon: 'pi pi-person',
+            label: 'Empleados',
+            icon: 'pi pi-id-card',
             routerLink: '',
           },
         ],
@@ -71,12 +68,12 @@ export class Sidebar implements OnInit {
         items: [
           {
             label: 'Tutores',
-            icon: 'pi pi-house',
+            icon: 'pi pi-address-book',
             routerLink: '',
           },
           {
-            label: 'Historial mascota',
-            icon: 'pi pi-house',
+            label: 'Historial',
+            icon: 'pi pi-folder',
             routerLink: '',
           },
         ],

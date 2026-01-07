@@ -4,8 +4,34 @@
 >
   <div class="flex justify-end md:hidden" (click)="closeSidebar()">
     <i class="pi pi-times" style="font-size: 1rem"></i>
+    <i class="pi pi-house"></i>
   </div>
   <div class="w-20">
-    <p-menu [model]="items" />
+    <!-- <p-menu [model]="items" /> -->
+    <ul class="space-y-4">
+      <li *ngFor="let group of items">
+        <h3 class="text-sm uppercase tracking-widest text-gray-500 font-semibold mb-2">
+          {{ group.label }}
+        </h3>
+        <ul class="space-y-2 pl-4">
+          @for(item of group.items; track item.id){
+          <li>
+            <a
+              [routerLink]="item.routerLink"
+              routerLinkActive="text-rose-600"
+              [routerLinkActiveOptions]="{ exact: true }"
+              class="flex items-center gap-2 text-gray-700 hover:text-rose-600"
+            >
+              <i [ngClass]="item.icon"></i> <span>{{ item.label }}</span>
+            </a>
+          </li>
+          }
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div class="absolute right-0 bottom-0">
+    <img src="/img/iconPG.png" alt="Sidebar img" class="w-32 h-auto" />
   </div>
 </aside>
