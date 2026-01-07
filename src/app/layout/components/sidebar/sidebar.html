@@ -1,7 +1,10 @@
 <aside
   [ngClass]="{ 'translate-x-0': isSidebarVisible, '-translate-x-full': !isSidebarVisible }"
-  class="fixed w-64 top-16 left-0 h-[calc(100%-4rem)] p-7"
+  class="translate-x-0 fixed h-full w-64 p-7 bg-white transform transition-transform duration-300 z-50 md:top-16 md:left-0 md:h-[calc(100%-4rem)]"
 >
+  <div class="flex justify-end md:hidden" (click)="closeSidebar()">
+    <i class="pi pi-times" style="font-size: 1rem"></i>
+  </div>
   <div class="w-20">
     <p-menu [model]="items" />
   </div>

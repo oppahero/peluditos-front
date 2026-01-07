@@ -88,4 +88,8 @@ export class Sidebar implements OnInit {
       this.cdr.detectChanges();
     });
   }
+
+  closeSidebar() {
+    this.sidebarService.setVisible(false);
+  }
 }
