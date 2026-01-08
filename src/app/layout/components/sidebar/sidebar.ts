@@ -37,7 +37,7 @@ export class Sidebar implements OnInit {
           {
             label: 'Dashboard',
             icon: 'pi pi-fw pi-home',
-            routerLink: '/dashboard',
+            routerLink: 'home',
           },
           // {
           //   label: 'Programmatic',
