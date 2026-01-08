@@ -1,13 +1,14 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { Topbar } from './components/topbar/topbar';
 import { Sidebar } from './components/sidebar/sidebar';
+import { Footer } from './components/footer/footer';
 import { RouterOutlet } from '@angular/router';
 import { SidebarService } from './services/sidebar-service';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-layout',
-  imports: [Topbar, Sidebar, RouterOutlet, CommonModule],
+  imports: [Topbar, Sidebar, Footer, RouterOutlet, CommonModule],
   templateUrl: './layout.html',
   styleUrl: './layout.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

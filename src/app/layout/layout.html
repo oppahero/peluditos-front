@@ -8,9 +8,10 @@
     [ngClass]="{ 'ml-0 md:ml-64': isSidebarVisible, 'ml-0': !isSidebarVisible }"
   >
     <div
-      class="h-full p-8 overflow-auto bg-rose-100 border-t border-t-rose-300 rounded-tl-[30px] shadow-[inset_0_3px_4px_#0000001a]"
+      class="min-h-full px-8 pt-8 flex flex-col justify-between overflow-auto bg-rose-100 border-t border-t-rose-300 rounded-tl-[30px] shadow-[inset_0_3px_4px_#0000001a]"
     >
       <router-outlet />
+      <app-footer />
     </div>
   </main>
 </div>
