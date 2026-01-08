@@ -78,6 +78,96 @@ export class Sidebar implements OnInit {
           },
         ],
       },
+      {
+        label: 'Pacientes',
+        items: [
+          {
+            label: 'Tutores',
+            icon: 'pi pi-address-book',
+            routerLink: '',
+          },
+          {
+            label: 'Historial',
+            icon: 'pi pi-folder',
+            routerLink: '',
+          },
+        ],
+      },
+      {
+        label: 'Pacientes',
+        items: [
+          {
+            label: 'Tutores',
+            icon: 'pi pi-address-book',
+            routerLink: '',
+          },
+          {
+            label: 'Historial',
+            icon: 'pi pi-folder',
+            routerLink: '',
+          },
+        ],
+      },
+      {
+        label: 'Pacientes',
+        items: [
+          {
+            label: 'Tutores',
+            icon: 'pi pi-address-book',
+            routerLink: '',
+          },
+          {
+            label: 'Historial',
+            icon: 'pi pi-folder',
+            routerLink: '',
+          },
+        ],
+      },
+      {
+        label: 'Pacientes',
+        items: [
+          {
+            label: 'Tutores',
+            icon: 'pi pi-address-book',
+            routerLink: '',
+          },
+          {
+            label: 'Historial',
+            icon: 'pi pi-folder',
+            routerLink: '',
+          },
+        ],
+      },
+      {
+        label: 'Pacientes',
+        items: [
+          {
+            label: 'Tutores',
+            icon: 'pi pi-address-book',
+            routerLink: '',
+          },
+          {
+            label: 'Historial',
+            icon: 'pi pi-folder',
+            routerLink: '',
+          },
+        ],
+      },
+      {
+        label: 'Pacientes',
+        items: [
+          {
+            label: 'Tutores',
+            icon: 'pi pi-address-book',
+            routerLink: '',
+          },
+          {
+            label: 'Historial',
+            icon: 'pi pi-folder',
+            routerLink: '',
+          },
+        ],
+      },
     ];
 
     this.sidebarService.visible$.subscribe((value) => {

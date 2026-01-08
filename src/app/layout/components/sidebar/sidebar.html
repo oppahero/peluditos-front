@@ -1,13 +1,16 @@
+@if (isSidebarVisible) {
+<div class="fixed inset-0 bg-black/50 z-40 md:hidden" (click)="closeSidebar()"></div>
+}
+
 <aside
   [ngClass]="{ 'translate-x-0': isSidebarVisible, '-translate-x-full': !isSidebarVisible }"
-  class="translate-x-0 fixed h-full w-64 p-7 bg-white transform transition-transform duration-300 z-50 md:top-16 md:left-0 md:h-[calc(100%-4rem)]"
+  class="translate-x-0 fixed h-full w-80 p-7 bg-white transform transition-transform duration-300 z-50 md:w-64 md:top-16 md:left-0 md:h-[calc(100%-4rem)]"
 >
-  <div class="flex justify-end md:hidden" (click)="closeSidebar()">
-    <i class="pi pi-times" style="font-size: 1rem"></i>
+  <!-- <div class="flex justify-end md:hidden mb-3" (click)="closeSidebar()">
+    <i class="pi pi-times text-base"></i>
     <i class="pi pi-house"></i>
-  </div>
-  <div class="w-20">
-    <!-- <p-menu [model]="items" /> -->
+  </div> -->
+  <div class="overflow-y-auto h-[calc(100%-200px)]">
     <ul class="space-y-4">
       <li *ngFor="let group of items">
         <h3 class="text-sm uppercase tracking-widest text-gray-500 font-semibold mb-2">
