@@ -1,3 +1,7 @@
+import { SidebarService } from '@app/layout/services/sidebar-service';
+import { RouterLink, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { MenuItem } from 'primeng/api';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -5,15 +9,10 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
-import { Menu } from 'primeng/menu';
-import { MenuItem } from 'primeng/api';
-import { CommonModule } from '@angular/common';
-import { SidebarService } from '@app/layout/services/sidebar-service';
-import { RouterLink, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [Menu, CommonModule, RouterLink, RouterModule],
+  imports: [CommonModule, RouterLink, RouterModule],
   templateUrl: './sidebar.html',
   styles: `
     :host ::ng-deep .p-menu {
@@ -61,10 +60,15 @@ export class Sidebar implements OnInit {
             icon: 'pi pi-id-card',
             routerLink: '',
           },
+          {
+            label: 'Reportes',
+            icon: 'pi pi-bookmark',
+            routerLink: '',
+          },
         ],
       },
       {
-        label: 'Pacientes',
+        label: 'Mascotas',
         items: [
           {
             label: 'Tutores',
@@ -72,92 +76,22 @@ export class Sidebar implements OnInit {
             routerLink: '',
           },
           {
-            label: 'Historial',
-            icon: 'pi pi-folder',
+            label: 'Mascotas',
+            icon: 'fa fa-solid fa-dog',
+            routerLink: 'pets',
+          },
+          {
+            label: 'Cliente Jurídico',
+            icon: 'fa fa-regular fa-id-badge',
             routerLink: '',
           },
         ],
       },
       {
-        label: 'Pacientes',
+        label: 'Servicios',
         items: [
           {
-            label: 'Tutores',
-            icon: 'pi pi-address-book',
-            routerLink: '',
-          },
-          {
-            label: 'Historial',
-            icon: 'pi pi-folder',
-            routerLink: '',
-          },
-        ],
-      },
-      {
-        label: 'Pacientes',
-        items: [
-          {
-            label: 'Tutores',
-            icon: 'pi pi-address-book',
-            routerLink: '',
-          },
-          {
-            label: 'Historial',
-            icon: 'pi pi-folder',
-            routerLink: '',
-          },
-        ],
-      },
-      {
-        label: 'Pacientes',
-        items: [
-          {
-            label: 'Tutores',
-            icon: 'pi pi-address-book',
-            routerLink: '',
-          },
-          {
-            label: 'Historial',
-            icon: 'pi pi-folder',
-            routerLink: '',
-          },
-        ],
-      },
-      {
-        label: 'Pacientes',
-        items: [
-          {
-            label: 'Tutores',
-            icon: 'pi pi-address-book',
-            routerLink: '',
-          },
-          {
-            label: 'Historial',
-            icon: 'pi pi-folder',
-            routerLink: '',
-          },
-        ],
-      },
-      {
-        label: 'Pacientes',
-        items: [
-          {
-            label: 'Tutores',
-            icon: 'pi pi-address-book',
-            routerLink: '',
-          },
-          {
-            label: 'Historial',
-            icon: 'pi pi-folder',
-            routerLink: '',
-          },
-        ],
-      },
-      {
-        label: 'Pacientes',
-        items: [
-          {
-            label: 'Tutores',
+            label: 'Servicios prestados',
             icon: 'pi pi-address-book',
             routerLink: '',
           },
