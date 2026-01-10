@@ -73,7 +73,7 @@ export class Sidebar implements OnInit {
           {
             label: 'Tutores',
             icon: 'pi pi-address-book',
-            routerLink: '',
+            routerLink: 'tutors',
           },
           {
             label: 'Mascotas',
