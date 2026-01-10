@@ -1,0 +1,34 @@
+<p-table #dt [columns]="cols()" [value]="rows() ?? []" [paginator]="paginator()" size="small">
+  <!-- <ng-template #caption>
+    <div class="flex items-center justify-between">
+      <h5 class="m-0">{{ title() }}</h5>
+      <p-iconfield>
+        <p-inputicon class="pi pi-search" />
+        <input
+          pInputText
+          type="text"
+          (input)="dt.filterGlobal($event.target.value, 'contains')"
+          placeholder="Search..."
+        />
+      </p-iconfield>
+    </div>
+  </ng-template> -->
+  <ng-template #header let-columns>
+    <tr>
+      @for (col of columns; track col) {
+      <th>
+        {{ col.header }}
+      </th>
+      }
+    </tr>
+  </ng-template>
+  <ng-template #body let-rowData let-columns="columns">
+    <tr>
+      @for (col of columns; track col) {
+      <td>
+        {{ rowData[col.field] }}
+      </td>
+      }
+    </tr>
+  </ng-template>
+</p-table>
