@@ -1,1 +1,10 @@
-<app-basic-table [rows]="rows" [cols]="cols" />
+<app-basic-table [rows]="rows()" [cols]="cols">
+  <ng-template #body let-rowData let-columns="columns">
+    <tr>
+      <td>{{ rowData.dni }}</td>
+      <td>{{ rowData.person.name }}</td>
+      <td>{{ rowData.person.phone }}</td>
+      <td>{{ rowData.person.email }}</td>
+    </tr>
+  </ng-template>
+</app-basic-table>
