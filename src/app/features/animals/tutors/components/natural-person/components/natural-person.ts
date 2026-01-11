@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { Column } from '@app/core/interfaces/primeng.interface';
 import { BasicTable } from '@app/shared/ui/basic-table/basic-table';
-import { NaturalAndPerson } from '../interfaces/naturalPerson';
 import { NaturalPersonFacade } from '../services/natural-person-facade';
 
 @Component({
