@@ -2,6 +2,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { errorInterceptor } from './core/interceptors/error-handler-interceptor';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
+import { authInterceptor } from './core/interceptors/auth-interceptor';
 
 import { providePrimeNG } from 'primeng/config';
 import { routes } from './app.routes';
@@ -18,7 +19,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes, withComponentInputBinding()),
-    provideHttpClient(withInterceptors([errorInterceptor])),
+    provideHttpClient(withInterceptors([authInterceptor, errorInterceptor])),
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {
