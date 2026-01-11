@@ -13,4 +13,8 @@ export class TokenService {
   getAccessToken(): string | null {
     return this.token;
   }
+
+  isLoggedIn() {
+    return !!this.token;
+  }
 }
