@@ -1,5 +1,5 @@
 <p-table #dt [columns]="cols()" [value]="rows() ?? []" [paginator]="paginator()" size="small">
-  <!-- <ng-template #caption>
+  <ng-template #caption>
     <div class="flex items-center justify-between">
       <h5 class="m-0">{{ title() }}</h5>
       <p-iconfield>
@@ -12,7 +12,7 @@
         />
       </p-iconfield>
     </div>
-  </ng-template> -->
+  </ng-template>
   <ng-template #header let-columns>
     <tr>
       @for (col of columns; track col) {
@@ -23,6 +23,13 @@
     </tr>
   </ng-template>
   <ng-template #body let-rowData let-columns="columns">
+    @if (customBodyTemplate) {
+    <ng-container
+      [ngTemplateOutlet]="customBodyTemplate"
+      [ngTemplateOutletContext]="{ $implicit: rowData, columns: cols }"
+    >
+    </ng-container>
+    } @else {
     <tr>
       @for (col of columns; track col) {
       <td>
@@ -30,5 +37,6 @@
       </td>
       }
     </tr>
+    }
   </ng-template>
 </p-table>
