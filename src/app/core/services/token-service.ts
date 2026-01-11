@@ -6,11 +6,11 @@ import { Injectable } from '@angular/core';
 export class TokenService {
   private token!: string;
 
-  set(token: string) {
+  setAccessToken(token: string) {
     this.token = token;
   }
 
-  get(): string | null {
+  getAccessToken(): string | null {
     return this.token;
   }
 }
