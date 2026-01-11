@@ -16,7 +16,7 @@ export class AuthFacade {
   login(credentials: LoginCredentials) {
     return this.authApi.auth(credentials).pipe(
       tap((res) => {
-        this.tokenService.set(res.accessToken);
+        this.tokenService.setAccessToken(res.accessToken);
         this.authUserStore.setUser(res.user);
         this.router.navigate(['/dashboard']);
       }),
