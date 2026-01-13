@@ -3,6 +3,7 @@ import { NaturalPersonApi } from './natural-person-api';
 import { PaginatedResponse } from '@app/core/interfaces/paginated-response.interface';
 import { NaturalAndPerson } from '../interfaces/naturalPerson';
 import { catchError, throwError } from 'rxjs';
+import { QueryFilters } from '@app/core/interfaces/query-filters.interface';
 
 @Injectable()
 export class NaturalPersonFacade {
@@ -11,7 +12,7 @@ export class NaturalPersonFacade {
   natural = computed(() => this.personsResponse()?.data.items);
   isLoading = signal(false);
 
-  loadPersons(params: { page: number; limit: number }) {
+  loadPersons(params: QueryFilters) {
     this.isLoading.set(true);
     this.naturalPersonApi
       .get(params)
