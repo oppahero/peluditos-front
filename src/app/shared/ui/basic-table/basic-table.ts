@@ -24,6 +24,6 @@ export class BasicTable {
   cols = input<Column[]>();
   paginator = input<boolean>(false);
   title = input<string>();
-
+  globalFilterFields = input<string[] | undefined>(undefined);
   @ContentChild('body', { static: false }) customBodyTemplate!: TemplateRef<any>;
 }
