@@ -1,23 +1,27 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { NaturalPerson } from './natural-person/components/natural-person';
+import { LegalEntities } from './legal-entities/components/legal-entities';
+import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
+import { SelectButtonModule } from 'primeng/selectbutton';
 import { CardModule } from 'primeng/card';
 import { MenuModule } from 'primeng/menu';
 import { MenuItem } from 'primeng/api';
-import { NaturalPerson } from './natural-person/components/natural-person';
-import { NaturalPersonFacade } from './natural-person/services/natural-person-facade';
 
 @Component({
   selector: 'app-tutors',
-  imports: [MenuModule, CardModule, NaturalPerson],
+  imports: [MenuModule, CardModule, SelectButtonModule, NaturalPerson, LegalEntities],
   templateUrl: './tutors.html',
-  styleUrl: './tutors.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [NaturalPersonFacade],
+  providers: [],
 })
 export class Tutors implements OnInit {
   items: MenuItem[] | undefined;
 
-  private naturalPersonFacade = inject(NaturalPersonFacade);
-  natural = this.naturalPersonFacade.natural;
+  stateOptions: any[] = [
+    { label: 'Persona Natural', value: true },
+    { label: 'Persona Jurídica', value: false },
+  ];
+
+  active = signal(true);
 
   ngOnInit() {
     this.items = [
@@ -26,16 +30,20 @@ export class Tutors implements OnInit {
         items: [
           {
             label: 'Persona Natural',
-            icon: 'pi pi-plus',
+            icon: 'fa fa-solid fa-person',
+            command: () => this.changeActive(true),
           },
           {
             label: 'Persona Jurídica',
-            icon: 'pi pi-search',
+            icon: 'fa fa-regular fa-building',
+            command: () => this.changeActive(false),
           },
         ],
       },
     ];
+  }
 
-    this.naturalPersonFacade.loadPersons({ page: 1, limit: 10 });
+  changeActive(value: boolean) {
+    this.active.set(value);
   }
 }

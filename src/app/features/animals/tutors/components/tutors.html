@@ -1,9 +1,13 @@
 <div class="grid grid-cols-1 xl:grid-cols-8 gap-4">
-  <div class="xl:col-span-6 flex gap-3">
+  <div class="xl:col-span-8 flex gap-3">
     <p-menu [model]="items" />
-    <p-card header="Tutores" class="w-full">
+    <p-card header="Tutores" class="w-full max-w-4xl">
+      @if (active()) {
       <app-natural-person />
+      }@else {
+      <app-legal-entities />
+      }
     </p-card>
   </div>
-  <p-card header="Información" class="xl:col-span-2 w-full"></p-card>
+  <!-- <p-card header="Información" class="xl:col-span-2 w-full"></p-card> -->
 </div>
