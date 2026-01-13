@@ -1,4 +1,15 @@
-<app-basic-table [rows]="rows()" [cols]="cols" title="Persona Natural">
+<app-basic-table
+  [rows]="rows()"
+  [cols]="cols"
+  title="Persona Natural"
+  [globalFilterFields]="[
+    'person.taxpayer_type',
+    'dni',
+    'person.name',
+    'person.phone',
+    'person.email'
+  ]"
+>
   <ng-template #body let-rowData let-columns="columns">
     <tr>
       <td>{{ rowData.person.taxpayer_type }} {{ rowData.dni }}</td>
