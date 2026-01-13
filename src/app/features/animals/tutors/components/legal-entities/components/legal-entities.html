@@ -1,0 +1,21 @@
+<app-basic-table
+  [rows]="rows()"
+  [cols]="cols"
+  title="Persona Jurídica"
+  [globalFilterFields]="[
+    'person.taxpayer_type',
+    'rif',
+    'person.name',
+    'person.phone',
+    'person.email'
+  ]"
+>
+  <ng-template #body let-rowData let-columns="columns">
+    <tr>
+      <td>{{ rowData.person.taxpayer_type }} {{ rowData.rif }}</td>
+      <td>{{ rowData.person.name }}</td>
+      <td>{{ rowData.person.phone }}</td>
+      <td>{{ rowData.person.email }}</td>
+    </tr>
+  </ng-template>
+</app-basic-table>
