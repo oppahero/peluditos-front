@@ -1,13 +1,22 @@
-<p-table #dt [columns]="cols()" [value]="rows() ?? []" [paginator]="paginator()" size="small">
+<p-table
+  #dt
+  [columns]="cols()"
+  [value]="rows() ?? []"
+  [paginator]="paginator()"
+  size="small"
+  filterMode="global"
+  [globalFilterFields]="globalFilterFields()"
+>
   <ng-template #caption>
     <div class="flex items-center justify-between">
       <h5 class="m-0">{{ title() }}</h5>
       <p-iconfield>
         <p-inputicon class="pi pi-search" />
         <input
+          #searchInput
           pInputText
           type="text"
-          (input)="dt.filterGlobal($event.target.value, 'contains')"
+          (input)="dt.filterGlobal(searchInput.value, 'contains')"
           placeholder="Search..."
           pSize="small"
         />
