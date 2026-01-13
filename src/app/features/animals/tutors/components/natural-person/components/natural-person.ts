@@ -8,6 +8,7 @@ import { NaturalPersonFacade } from '../services/natural-person-facade';
   imports: [BasicTable],
   templateUrl: './natural-person.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [NaturalPersonFacade],
 })
 export class NaturalPerson implements OnInit {
   cols!: Column[];
