@@ -2,20 +2,20 @@
   [rows]="rows()"
   [cols]="cols"
   title="Persona Natural"
+  [selection]="selected"
+  [paginator]="true"
   [globalFilterFields]="[
     'person.taxpayer_type',
     'dni',
     'person.name',
     'person.phone',
-    'person.email'
+    'person.email',
   ]"
 >
   <ng-template #body let-rowData let-columns="columns">
-    <tr>
-      <td>{{ rowData.person.taxpayer_type }} {{ rowData.dni }}</td>
-      <td>{{ rowData.person.name }}</td>
-      <td>{{ rowData.person.phone }}</td>
-      <td>{{ rowData.person.email }}</td>
-    </tr>
+    <td>{{ rowData.person.taxpayer_type }}-{{ rowData.dni }}</td>
+    <td>{{ rowData.person.name }}</td>
+    <td>{{ rowData.person.phone | phone }}</td>
+    <td>{{ rowData.person.email }}</td>
   </ng-template>
 </app-basic-table>

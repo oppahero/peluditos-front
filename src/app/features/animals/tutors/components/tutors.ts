@@ -30,7 +30,7 @@ export class Tutors implements OnInit {
         items: [
           {
             label: 'Persona Natural',
-            icon: 'fa fa-solid fa-person',
+            icon: 'pi pi-id-card',
             command: () => this.changeActive(true),
           },
           {
