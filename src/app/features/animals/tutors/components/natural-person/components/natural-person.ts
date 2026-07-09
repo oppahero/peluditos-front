@@ -14,6 +14,7 @@ import { PhonePipe } from '@app/shared/pipes/phone-pipe';
 export class NaturalPerson implements OnInit {
   private naturalPersonFacade = inject(NaturalPersonFacade);
   rows = this.naturalPersonFacade.natural;
+  pageInfo = this.naturalPersonFacade.pageInfo;
 
   cols: Column[] = [
     { header: 'CI' },
@@ -24,9 +25,32 @@ export class NaturalPerson implements OnInit {
 
   selected: any;
 
+  private readonly DEFAULT_PAGE_INFO = { page: 1, limit: 10 };
+
   constructor() {}
 
   ngOnInit(): void {
     this.naturalPersonFacade.loadPersons({ page: 1, limit: 10 });
+  }
+
+  private loadPersonsPage(page: number, limit: number): void {
+    this.naturalPersonFacade.loadPersons({ page, limit });
+  }
+
+  prevPage() {
+    const { page, limit } = this.pageInfo() ?? this.DEFAULT_PAGE_INFO;
+
+    if (page > 1) this.loadPersonsPage(page - 1, limit);
+  }
+
+  nextPage() {
+    const { page, limit } = this.pageInfo() ?? this.DEFAULT_PAGE_INFO;
+
+    this.loadPersonsPage(page + 1, limit);
+  }
+
+  resetPage() {
+    const { page, limit } = this.DEFAULT_PAGE_INFO;
+    this.loadPersonsPage(page, limit);
   }
 }

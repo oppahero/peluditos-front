@@ -3,7 +3,7 @@
   [cols]="cols"
   title="Persona Natural"
   [selection]="selected"
-  [paginator]="true"
+  [pageInfo]="pageInfo()"
   [globalFilterFields]="[
     'person.taxpayer_type',
     'dni',
@@ -11,7 +11,11 @@
     'person.phone',
     'person.email',
   ]"
+  (nextPage)="nextPage()"
+  (resetPage)="prevPage()"
+  (prevPage)="resetPage()"
 >
+  >
   <ng-template #body let-rowData let-columns="columns">
     <td>{{ rowData.person.taxpayer_type }}-{{ rowData.dni }}</td>
     <td>{{ rowData.person.name }}</td>
