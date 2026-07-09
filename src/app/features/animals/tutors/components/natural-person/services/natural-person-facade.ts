@@ -10,6 +10,15 @@ export class NaturalPersonFacade {
   private naturalPersonApi = inject(NaturalPersonApi);
   personsResponse = signal<PaginatedResponse<NaturalAndPerson> | undefined>(undefined);
   natural = computed(() => this.personsResponse()?.data.items);
+
+  pageInfo = computed(() => {
+    const data = this.personsResponse()?.data;
+
+    return data
+      ? { page: data.page, limit: data.limit, lastPage: data.lastPage, total: data.total }
+      : null;
+  });
+
   isLoading = signal(false);
 
   loadPersons(params: QueryFilters) {
@@ -20,9 +29,10 @@ export class NaturalPersonFacade {
         catchError((error) => {
           console.error('Error al cargar personas naturales', error);
           return throwError(() => error);
-        })
+        }),
       )
       .subscribe((persons) => {
+        console.log('persons', persons);
         this.personsResponse.set(persons);
         this.isLoading.set(false);
       });
