@@ -57,4 +57,36 @@
       </tr>
     }
   </ng-template>
+  <ng-template #emptymessage>
+    <tr>
+      <td [attr.colspan]="cols()?.length">No se han encontrado registros.</td>
+    </tr>
+  </ng-template>
+  <ng-template #summary>
+    <div class="flex justify-center pt-2.5">
+      <p-button
+        type="button"
+        icon="pi pi-chevron-left"
+        (click)="prev()"
+        [disabled]="isFirstPage()"
+        text
+      />
+      <input type="text" class="w-10 text-center" readonly pInputText [value]="pageInfo()?.page" />
+      <p-button type="button" icon="pi pi-refresh" (click)="reset()" text />
+      <p-button
+        type="button"
+        icon="pi pi-chevron-right"
+        (click)="next()"
+        [disabled]="isLastPage()"
+        text
+      />
+    </div>
+  </ng-template>
+  @if (pageInfo()) {
+    <ng-template #footer>
+      <tr>
+        <td colspan="6">Total de registros: {{ pageInfo().total ?? 0 }} registros.</td>
+      </tr>
+    </ng-template>
+  }
 </p-table>
