@@ -30,27 +30,27 @@ export class NaturalPerson implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.naturalPersonFacade.loadPersons({ page: 1, limit: 10 });
+    this.resetPage();
   }
 
-  private loadPersonsPage(page: number, limit: number): void {
+  private loadPage(page: number, limit: number): void {
     this.naturalPersonFacade.loadPersons({ page, limit });
   }
 
   prevPage() {
     const { page, limit } = this.pageInfo() ?? this.DEFAULT_PAGE_INFO;
 
-    if (page > 1) this.loadPersonsPage(page - 1, limit);
+    if (page > 1) this.loadPage(page - 1, limit);
   }
 
   nextPage() {
     const { page, limit } = this.pageInfo() ?? this.DEFAULT_PAGE_INFO;
 
-    this.loadPersonsPage(page + 1, limit);
+    this.loadPage(page + 1, limit);
   }
 
   resetPage() {
     const { page, limit } = this.DEFAULT_PAGE_INFO;
-    this.loadPersonsPage(page, limit);
+    this.loadPage(page, limit);
   }
 }
