@@ -1,13 +1,30 @@
-<div class="grid grid-cols-1 xl:grid-cols-8 gap-4">
-  <div class="xl:col-span-8 flex gap-3">
-    <p-menu [model]="items" />
-    <p-card header="Tutores" class="w-full max-w-4xl">
-      @if (active()) {
-      <app-natural-person />
-      }@else {
-      <app-legal-entities />
-      }
+<div class="grid grid-cols-1 gap-4">
+  <div class="flex gap-3">
+    <p-menu
+      [model]="items"
+      class="hidden md:block"
+      [pt]="{
+        itemLink: { class: 'focus:bg-blue-100 focus:text-blue-700 active:bg-blue-200' },
+      }"
+    />
+
+    <p-card header="hola" class="w-full max-w-4xl">
+      <ng-template pTemplate="title">
+        <div class="flex align-items-center justify-content-between gap-2">
+          <div class="flex align-items-center gap-2">
+            <p-menu #menu [model]="items" [popup]="true" class="md:hidden" />
+            <p-button
+              size="small"
+              (click)="menu.toggle($event)"
+              icon="pi pi-ellipsis-v"
+              class="md:hidden"
+            />
+            <span class="text-xl text-gray-700">Tutores</span>
+          </div>
+        </div>
+      </ng-template>
+
+      <router-outlet />
     </p-card>
   </div>
-  <!-- <p-card header="Información" class="xl:col-span-2 w-full"></p-card> -->
 </div>

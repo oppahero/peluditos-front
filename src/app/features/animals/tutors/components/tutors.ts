@@ -5,23 +5,26 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { CardModule } from 'primeng/card';
 import { MenuModule } from 'primeng/menu';
 import { MenuItem } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-tutors',
-  imports: [MenuModule, CardModule, SelectButtonModule, NaturalPerson, LegalEntities],
+  imports: [
+    RouterOutlet,
+    MenuModule,
+    CardModule,
+    SelectButtonModule,
+    NaturalPerson,
+    LegalEntities,
+    ButtonModule,
+  ],
   templateUrl: './tutors.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [],
 })
 export class Tutors implements OnInit {
   items: MenuItem[] | undefined;
-
-  stateOptions: any[] = [
-    { label: 'Persona Natural', value: true },
-    { label: 'Persona Jurídica', value: false },
-  ];
-
-  active = signal(true);
 
   ngOnInit() {
     this.items = [
@@ -31,19 +34,16 @@ export class Tutors implements OnInit {
           {
             label: 'Persona Natural',
             icon: 'pi pi-id-card',
-            command: () => this.changeActive(true),
+            // command: () => this.changeActive(true),
+            routerLink: 'natural',
           },
           {
             label: 'Persona Jurídica',
             icon: 'fa fa-regular fa-building',
-            command: () => this.changeActive(false),
+            routerLink: 'entitie',
           },
         ],
       },
     ];
-  }
-
-  changeActive(value: boolean) {
-    this.active.set(value);
   }
 }

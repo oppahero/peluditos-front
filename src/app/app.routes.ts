@@ -27,6 +27,23 @@ export const routes: Routes = [
         path: 'tutors',
         loadComponent: () =>
           import('./features/animals/tutors/components/tutors').then((m) => m.Tutors),
+        children: [
+          { path: '', redirectTo: 'natural', pathMatch: 'full' },
+          {
+            path: 'natural',
+            loadComponent: () =>
+              import('./features/animals/tutors/components/natural-person/components/natural-person').then(
+                (m) => m.NaturalPerson,
+              ),
+          },
+          {
+            path: 'entitie',
+            loadComponent: () =>
+              import('./features/animals/tutors/components/legal-entities/components/legal-entities').then(
+                (m) => m.LegalEntities,
+              ),
+          },
+        ],
       },
     ],
   },
