@@ -17,9 +17,9 @@
 >
   >
   <ng-template #body let-rowData let-columns="columns">
-    <td>{{ rowData.person.taxpayer_type }}-{{ rowData.dni }}</td>
-    <td>{{ rowData.person.name }}</td>
-    <td>{{ rowData.person.phone | phone }}</td>
-    <td>{{ rowData.person.email }}</td>
+    <td class="whitespace-nowrap">{{ rowData.person.taxpayer_type }}-{{ rowData.dni }}</td>
+    <td class="whitespace-nowrap">{{ rowData.person.name }}</td>
+    <td class="whitespace-nowrap">{{ rowData.person.phone | phone }}</td>
+    <td class="whitespace-nowrap">{{ rowData.person.email }}</td>
   </ng-template>
 </app-basic-table>
