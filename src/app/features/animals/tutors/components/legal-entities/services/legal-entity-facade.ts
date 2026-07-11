@@ -10,6 +10,15 @@ export class LegalEntityFacade {
   private legalEntityApi = inject(LegalEntityApi);
   entitiesResponse = signal<PaginatedResponse<legalAndPerson> | undefined>(undefined);
   legal = computed(() => this.entitiesResponse()?.data.items);
+
+  pageInfo = computed(() => {
+    const data = this.entitiesResponse()?.data;
+
+    return data
+      ? { page: data.page, limit: data.limit, lastPage: data.lastPage, total: data.total }
+      : null;
+  });
+
   loading = signal(false);
 
   loadEntities(params: QueryFilters) {
@@ -20,7 +29,7 @@ export class LegalEntityFacade {
         catchError((error) => {
           console.error('Error al cargar persona juridica', error);
           return throwError(() => error);
-        })
+        }),
       )
       .subscribe((entities) => {
         this.entitiesResponse.set(entities);

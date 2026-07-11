@@ -2,20 +2,23 @@
   [rows]="rows()"
   [cols]="cols"
   title="Persona Jurídica"
+  [selection]="selected"
+  [pageInfo]="pageInfo()"
   [globalFilterFields]="[
     'person.taxpayer_type',
     'rif',
     'person.name',
     'person.phone',
-    'person.email'
+    'person.email',
   ]"
+  (nextPage)="nextPage()"
+  (resetPage)="prevPage()"
+  (prevPage)="resetPage()"
 >
   <ng-template #body let-rowData let-columns="columns">
-    <tr>
-      <td>{{ rowData.person.taxpayer_type }} {{ rowData.rif }}</td>
-      <td>{{ rowData.person.name }}</td>
-      <td>{{ rowData.person.phone }}</td>
-      <td>{{ rowData.person.email }}</td>
-    </tr>
+    <td class="whitespace-nowrap">{{ rowData.person.taxpayer_type }}-{{ rowData.rif }}</td>
+    <td class="whitespace-nowrap">{{ rowData.person.name }}</td>
+    <td class="whitespace-nowrap">{{ rowData.person.phone | phone }}</td>
+    <td class="whitespace-nowrap">{{ rowData.person.email }}</td>
   </ng-template>
 </app-basic-table>
