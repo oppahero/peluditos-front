@@ -1,0 +1,164 @@
+<app-dialog
+  [(visible)]="showForm"
+  [title]="title()"
+  [breakpoints]="dialogBreakpoints"
+  (closed)="onModalClosed()"
+>
+  <form [formGroup]="mainForm">
+    <div class="grid grid-cols-1 sm:grid-cols-12 md:grid-cols-12 gap-4 w-full">
+      @if (isTutorForm()) {
+        <div class="sm:col-span-5 md:col-span-4">
+          <label for="registerType">Tipo</label>
+          <p-inputgroup>
+            <p-select
+              [options]="formTypes"
+              class="w-full"
+              appendTo="body"
+              [(ngModel)]="formTypeSelected"
+              [ngModelOptions]="{ standalone: true }"
+              (onChange)="setTaxpayer()"
+            />
+          </p-inputgroup>
+        </div>
+      }
+
+      <!-- 🔵 SUBGRUPO: PERSON -->
+      <ng-container formGroupName="person">
+        <div class="sm:col-span-5 md:col-span-5">
+          <label for="dni">Dni</label>
+          <p-inputgroup>
+            <p-select
+              [options]="taxpayerTypes"
+              class="w-full"
+              [style]="{ 'max-width': '80px' }"
+              appendTo="body"
+              [formControl]="$any(mainForm.get('person.taxpayer_type'))"
+            >
+              <ng-template #selectedItem let-selectedOption>
+                @if (selectedOption) {
+                  <div class="flex items-center gap-1">
+                    {{ selectedOption.value }}
+                  </div>
+                }
+              </ng-template>
+            </p-select>
+            @if (formTypeSelected === RegisterType.LegalEntity) {
+              <input
+                id="rif"
+                type="text"
+                pInputText
+                class="w-full"
+                [formControl]="$any(mainForm.get('entity.rif'))"
+              />
+            } @else {
+              <input
+                id="dni"
+                type="text"
+                pInputText
+                class="w-full"
+                [formControl]="$any(mainForm.get('natural.dni'))"
+              />
+            }
+          </p-inputgroup>
+        </div>
+
+        <div class="sm:col-span-7 md:col-span-7">
+          <label for="name"
+            >Nombre {{ formTypeSelected === RegisterType.Natural ? ' y Apellido' : '' }}</label
+          >
+          <input formControlName="name" id="name" type="text" pInputText class="w-full" />
+        </div>
+        <div class="sm:col-span-5 md:col-span-5">
+          <label for="phone">Teléfono Móvil</label>
+          <p-inputgroup>
+            <p-select
+              optionLabel="value"
+              class="w-full"
+              [style]="{ 'max-width': '105px' }"
+              appendTo="body"
+              [options]="areaCodes"
+              optionLabel="value"
+              optionValue="value"
+              formControlName="areaCode"
+            />
+            <input formControlName="phone" id="phone" type="text" pInputText class="w-full" />
+          </p-inputgroup>
+        </div>
+        <div class="sm:col-span-6">
+          <label for="email">Correo</label>
+          <input formControlName="email" id="email" type="text" pInputText class="w-full" />
+        </div>
+        <div class="sm:col-span-6">
+          <label for="address">Dirección</label>
+          <input formControlName="address" id="address" type="text" pInputText class="w-full" />
+        </div>
+      </ng-container>
+
+      <!-- 🟢 SUBGRUPO: NATURAL -->
+      @if (formTypeSelected === RegisterType.Natural) {
+        <ng-container formGroupName="natural">
+          <div class="sm:col-span-4 md:col-span-4">
+            <label for="birthdate">Fecha Nac.</label>
+            <p-datepicker formControlName="birthdate" fluid appendTo="body" dateFormat="dd-mm-yy" />
+          </div>
+          <div class="sm:col-span-3 md:col-span-3">
+            <label for="gender">Género</label>
+            <div class="flex flex-wrap gap-4">
+              <div class="flex items-center">
+                <p-radiobutton
+                  formControlName="gender"
+                  name="gender"
+                  value="F"
+                  inputId="femenine"
+                />
+                <label for="femenine" class="ml-2">F</label>
+              </div>
+
+              <div class="flex items-center">
+                <p-radiobutton
+                  formControlName="gender"
+                  name="gender"
+                  value="M"
+                  inputId="masculine"
+                />
+                <label for="masculine" class="ml-2">M</label>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      }
+
+      <!-- 🟢 SUBGRUPO: EMPLOYEE -->
+      @if (formTypeSelected === RegisterType.Employee) {
+        <ng-container formGroupName="employee">
+          <div class="sm:col-span-5 md:col-span-4">
+            <label for="dni">Dni</label>
+            <p-inputgroup>
+              <p-select
+                [options]="employees"
+                class="w-full"
+                [style]="{ 'max-width': '80px' }"
+                appendTo="body"
+                [formControl]="$any(mainForm.get('person.taxpayer_type'))"
+              >
+                <ng-template #selectedItem let-selectedOption>
+                  @if (selectedOption) {
+                    <div class="flex items-center gap-1">
+                      {{ selectedOption.value }}
+                    </div>
+                  }
+                </ng-template>
+              </p-select>
+              <input formControlName="dni" id="dni" type="text" pInputText class="w-full" />
+            </p-inputgroup>
+          </div>
+        </ng-container>
+      }
+    </div>
+  </form>
+
+  <div footer class="flex justify-end gap-2 mt-3">
+    <!-- [disabled]="!mainForm.valid"  -->
+    <p-button label="Save" (click)="onSubmit()" size="small" [disabled]="!mainForm.valid" />
+  </div>
+</app-dialog>
