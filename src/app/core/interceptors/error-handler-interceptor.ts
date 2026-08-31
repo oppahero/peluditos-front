@@ -9,10 +9,23 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
       // if (err.status === 401)
       // unauthorized
 
-      // console.log('Error interceptor', err);
-      // console.log('Error con error error', err.error.error);
+      // let responseError = err.status === 401 ? err.error.error : err.error;
+      let responseError: any;
 
-      let responseError = err.status === 401 ? err.error.error : err.error;
+      if (err.status === 401) {
+        responseError = err.error?.error;
+      } else if (err.status === 400) {
+        // Si la estructura del backend incluye el array 'errors' dentro de 'error'
+        const backendErrors = err.error?.error?.errors;
+
+        if (Array.isArray(backendErrors)) {
+          responseError = { message: backendErrors.join('. ') };
+        } else {
+          responseError = err.error;
+        }
+      } else {
+        responseError = err.error;
+      }
 
       if (err.status === 0)
         errorMsg = {
@@ -26,6 +39,6 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
       };
 
       return throwError(() => errorInfo);
-    })
+    }),
   );
 };
