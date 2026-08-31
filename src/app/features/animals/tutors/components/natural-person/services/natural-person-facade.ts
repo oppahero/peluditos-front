@@ -1,14 +1,16 @@
-import { computed, inject, Injectable, signal } from '@angular/core';
-import { NaturalPersonApi } from './natural-person-api';
 import { PaginatedResponse } from '@app/core/interfaces/paginated-response.interface';
-import { NaturalAndPerson } from '../interfaces/naturalPerson';
-import { catchError, throwError } from 'rxjs';
 import { QueryFilters } from '@app/core/interfaces/query-filters.interface';
+import { computed, inject, Injectable, signal } from '@angular/core';
+import { NaturalPerson } from '../interfaces/naturalPerson';
+import { NaturalPersonApi } from './natural-person-api';
+import { catchError, Observable, tap, throwError } from 'rxjs';
+import { ResizableColumn } from 'primeng/table';
+import { Response } from '@app/core/interfaces/response.interface';
 
 @Injectable()
 export class NaturalPersonFacade {
   private naturalPersonApi = inject(NaturalPersonApi);
-  personsResponse = signal<PaginatedResponse<NaturalAndPerson> | undefined>(undefined);
+  personsResponse = signal<PaginatedResponse<NaturalPerson> | undefined>(undefined);
   natural = computed(() => this.personsResponse()?.data.items);
 
   pageInfo = computed(() => {

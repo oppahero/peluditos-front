@@ -3,7 +3,8 @@ import { inject, Injectable } from '@angular/core';
 import { PaginatedResponse } from '@app/core/interfaces/paginated-response.interface';
 import { QueryFilters } from '@app/core/interfaces/query-filters.interface';
 import { environment } from '@environments/environment.development';
-import { legalAndPerson } from '../interfaces/legalEntity';
+import { LegalEntity } from '../interfaces/legalEntity';
+import { Response } from '@app/core/interfaces/response.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +18,10 @@ export class LegalEntityApi {
     if (page) params = params.set('page', page);
     if (limit) params = params.set('limit', limit);
 
-    return this.http.get<PaginatedResponse<legalAndPerson>>(this.url, { params });
+    return this.http.get<PaginatedResponse<LegalEntity>>(this.url, { params });
+  }
+
+  register(data: LegalEntity) {
+    return this.http.post<Response<LegalEntity>>(this.url, data);
   }
 }
