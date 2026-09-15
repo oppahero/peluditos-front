@@ -23,6 +23,8 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
         } else {
           responseError = err.error;
         }
+      } else if (err.status === 409) {
+        responseError = { message: err.error?.error?.detail };
       } else {
         responseError = err.error;
       }
