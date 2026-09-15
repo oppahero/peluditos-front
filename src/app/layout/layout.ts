@@ -5,10 +5,11 @@ import { Footer } from './components/footer/footer';
 import { RouterOutlet } from '@angular/router';
 import { SidebarService } from './services/sidebar-service';
 import { CommonModule } from '@angular/common';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-layout',
-  imports: [Topbar, Sidebar, Footer, RouterOutlet, CommonModule],
+  imports: [Topbar, Sidebar, Footer, RouterOutlet, CommonModule, ToastModule],
   templateUrl: './layout.html',
   styleUrl: './layout.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

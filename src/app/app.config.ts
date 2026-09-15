@@ -3,7 +3,7 @@ import { errorInterceptor } from './core/interceptors/error-handler-interceptor'
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { authInterceptor } from './core/interceptors/auth-interceptor';
-
+import { MessageService } from 'primeng/api';
 import { providePrimeNG } from 'primeng/config';
 import { routes } from './app.routes';
 import { MyPreset } from './theme';
@@ -33,5 +33,6 @@ export const appConfig: ApplicationConfig = {
         },
       },
     }),
+    MessageService,
   ],
 };
