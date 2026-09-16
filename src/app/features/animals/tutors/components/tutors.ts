@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, model, OnInit } from '@angular/core';
+import { TutorForm } from '@app/shared/ui/tutor-form/components/tutor-form';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { RouterOutlet } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { MenuModule } from 'primeng/menu';
 import { MenuItem } from 'primeng/api';
-import { TutorForm } from './tutor-form/components/tutor-form';
 
 @Component({
   selector: 'app-tutors',

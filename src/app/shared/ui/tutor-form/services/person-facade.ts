@@ -1,5 +1,5 @@
-import { NaturalPersonApi } from '../../natural-person/services/natural-person-api';
-import { LegalEntityApi } from '../../legal-entities/services/legal-entity-api';
+import { NaturalPersonApi } from '../../../../features/animals/tutors/components/natural-person/services/natural-person-api';
+import { LegalEntityApi } from '../../../../features/animals/tutors/components/legal-entities/services/legal-entity-api';
 import { RegisterType } from '@app/core/enums/types-of-register.enum';
 import { catchError, Observable, throwError } from 'rxjs';
 import { inject, Injectable } from '@angular/core';
