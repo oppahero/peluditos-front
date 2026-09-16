@@ -1,40 +1,32 @@
-import { NaturalPerson } from './natural-person/components/natural-person';
-import { LegalEntities } from './legal-entities/components/legal-entities';
-import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, model, OnInit } from '@angular/core';
 import { SelectButtonModule } from 'primeng/selectbutton';
+import { RouterOutlet } from '@angular/router';
+import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { MenuModule } from 'primeng/menu';
 import { MenuItem } from 'primeng/api';
-import { ButtonModule } from 'primeng/button';
-import { RouterOutlet } from '@angular/router';
+import { TutorForm } from './tutor-form/components/tutor-form';
 
 @Component({
   selector: 'app-tutors',
-  imports: [
-    RouterOutlet,
-    MenuModule,
-    CardModule,
-    SelectButtonModule,
-    NaturalPerson,
-    LegalEntities,
-    ButtonModule,
-  ],
+  imports: [RouterOutlet, MenuModule, CardModule, SelectButtonModule, ButtonModule, TutorForm],
   templateUrl: './tutors.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [],
 })
 export class Tutors implements OnInit {
   items: MenuItem[] | undefined;
+  showForm = model<boolean>(false);
+  title: string = 'Nuevo Tutor';
 
   ngOnInit() {
     this.items = [
       {
-        label: 'Opciones',
+        label: 'Consultas',
         items: [
           {
             label: 'Persona Natural',
             icon: 'pi pi-id-card',
-            // command: () => this.changeActive(true),
             routerLink: 'natural',
           },
           {
@@ -44,6 +36,26 @@ export class Tutors implements OnInit {
           },
         ],
       },
+      {
+        label: 'Opciones',
+        items: [
+          {
+            label: 'Nuevo tutor',
+            icon: 'pi pi-plus',
+            command: () => {
+              this.displayForm(true);
+            },
+          },
+          {
+            label: 'Buscar',
+            icon: 'pi pi-search',
+          },
+        ],
+      },
     ];
+  }
+
+  displayForm(value: boolean) {
+    this.showForm.set(value);
   }
 }
