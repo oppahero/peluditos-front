@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class SidebarService {
-  private _visible = new BehaviorSubject<boolean>(true);
+  private _visible = new BehaviorSubject<boolean>(window.innerWidth >= 768);
   visible$ = this._visible.asObservable();
 
   toggle() {
