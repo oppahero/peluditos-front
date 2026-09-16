@@ -16,7 +16,7 @@
               appendTo="body"
               [(ngModel)]="formTypeSelected"
               [ngModelOptions]="{ standalone: true }"
-              (onChange)="setTaxpayer()"
+              (onChange)="setTaxpayer(); onOptionChange(formTypeSelected)"
             />
           </p-inputgroup>
         </div>

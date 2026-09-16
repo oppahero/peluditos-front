@@ -1,29 +1,30 @@
-import {
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { TAXPAYER_OPTIONS } from '@app/shared/constants/taxpayer.constants';
 import { ChangeDetectionStrategy, Component, inject, input, model, OnInit } from '@angular/core';
+import { REGISTER_OPTIONS } from '@app/shared/constants/type-of-register.constants';
+import { EMPLOYEES_OPTIONS } from '@app/shared/constants/employee.constants';
+import { AREACODE_OPTIONS } from '@app/shared/constants/area-code.constants';
+import { TAXPAYER_OPTIONS } from '@app/shared/constants/taxpayer.constants';
+import { TaxpayerOption } from '@app/shared/constants/taxpayer.constants';
+import { TypesOfTaxpayer } from '@app/core/enums/types-of-taxpayer.enum';
+import { RegisterType } from '@app/core/enums/types-of-register.enum';
+import { Response } from '@app/core/interfaces/response.interface';
+import { ToastService } from '@app/core/services/toast.service';
+import { PersonFacade } from '../services/person-facade';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { Dialog } from '@app/shared/ui/dialog/dialog';
 import { InputGroupModule } from 'primeng/inputgroup';
+import { DatePickerModule } from 'primeng/datepicker';
 import { InputTextModule } from 'primeng/inputtext';
 import { CommonModule } from '@angular/common';
 import { SelectModule } from 'primeng/select';
-import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
-import { DatePickerModule } from 'primeng/datepicker';
-import { TypesOfTaxpayer } from '@app/core/enums/types-of-taxpayer.enum';
-import { EMPLOYEES_OPTIONS } from '@app/shared/constants/employee.constants';
-import { REGISTER_OPTIONS } from '@app/shared/constants/type-of-register.constants';
-import { TaxpayerOption } from '@app/shared/constants/taxpayer.constants';
-import { RegisterType } from '@app/core/enums/types-of-register.enum';
-import { AREACODE_OPTIONS } from '@app/shared/constants/area-code.constants';
-import { PersonFacade } from '../services/person-facade';
-import { Response } from '@app/core/interfaces/response.interface';
+import { CardModule } from 'primeng/card';
+import {
+  FormGroup,
+  Validators,
+  FormsModule,
+  FormBuilder,
+  ReactiveFormsModule,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-tutor-form',
@@ -47,6 +48,7 @@ import { Response } from '@app/core/interfaces/response.interface';
 })
 export class TutorForm implements OnInit {
   private personFacade = inject(PersonFacade);
+  private toastService = inject(ToastService);
 
   mainForm!: FormGroup;
   showForm = model<boolean>(true);
@@ -171,14 +173,13 @@ export class TutorForm implements OnInit {
     return {
       next: (res: Response<any>) => {
         if (res.success) {
-          // this.messageService.add({ severity: 'success', summary: 'Éxito', detail: res.message });
-          this.showForm.apply(false);
+          this.toastService.showSuccess(res.message || 'Registro exitoso');
+          this.showForm.set(false);
         }
       },
       error: (err: any) => {
         const errorMessage = err.message || 'Ocurrió un error al registrar';
-        console.log('el error', errorMessage);
-        // this.messageService.add({ severity: 'error', summary: 'Error', detail: errorMessage });
+        this.toastService.showError(errorMessage);
       },
     };
   }
@@ -186,13 +187,10 @@ export class TutorForm implements OnInit {
   onSubmit(): void {
     const personData = this.mainForm.value.person;
     const naturalData = this.mainForm.value.natural;
-    console.log('Persona:', personData);
-    console.log('Natural:', naturalData);
 
     if (this.mainForm.valid) {
       const type = this.formTypeSelected;
       const payload = this._buildPayloadByType(type);
-      console.log('envio', payload);
       this.personFacade.register(type, payload).subscribe(this._handleApiResponse);
     } else {
       this.mainForm.markAllAsTouched();
